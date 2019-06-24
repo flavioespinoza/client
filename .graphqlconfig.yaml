@@ -1,0 +1,3 @@
+projects:
+  authnet-client:
+    schemaPath: schema.graphql
