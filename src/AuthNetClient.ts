@@ -10,11 +10,12 @@ import _disco from './api/_disco'
 const httpLink = ApolloLink.from([
 	onError(({ graphQLErrors, networkError }) => {
 		if (graphQLErrors) {
-			graphQLErrors.map(({ message, locations, path }) =>
+			graphQLErrors.map(({ message, locations, path }) =>{
 				console.log(
-					`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-				),
-			)
+					`[GraphQL error]: Message: ${message}, 
+					Location: ${locations}, Path: ${path}`
+				)
+			})
 		}
 		if (networkError) console.log(`[Network error]: ${networkError}`)
 	}),

@@ -1,0 +1,107 @@
+type Email {
+  _pnMetadata: PNMetadata
+  endDate: String
+  startDate: String
+  type: String!
+  value: String!
+}
+
+enum Gender {
+  M
+  F
+}
+
+type Identifier {
+  SSNs: [SSN]
+  emails: [Email]
+  phoneNumbers: [PhoneNumber]
+  type: String!
+}
+
+type Name {
+  _pnMetadata: PNMetadata
+  additionlName: String
+  endDate: String
+  familyName: String
+  fullName: String
+  givenName: String
+  honorificPrefix: String
+  honorificSuffix: String
+  startDate: String
+  type: String!
+  use: [NameUse]
+}
+
+enum NameUse {
+  ALIAS
+  PRIMARY
+}
+
+type Person {
+  _pnMetadata: PNMetadata
+  birthDate: String
+  gender: Gender
+  id: ID!
+  identifiers: Identifier
+  names: [Name]
+  postalAddresses: [PostalAddress]
+  recordID: String
+  sourceID: String
+  type: String!
+}
+
+type PhoneNumber {
+  _pnMetadata: PNMetadata
+  endDate: String
+  startDate: String
+  type: String!
+  use: [PhoneNumberUse]
+  value: String!
+}
+
+enum PhoneNumberUse {
+  HOME
+  WORK
+  CELL
+}
+
+type PNMetadata {
+  someMetadata: String
+}
+
+type PostalAddress {
+  _pnMetadata: PNMetadata
+  addressCountry: String
+  addressFull: String
+  addressLocality: String
+  addressRegion: String
+  endDate: String
+  postOfficeBoxNumber: String
+  postalCode: String
+  startDate: String
+  streetAddress: String
+  type: String!
+  use: [PostalAddressUse]
+}
+
+enum PostalAddressUse {
+  HOME
+  WORK
+  MAIL
+  BILLING
+}
+
+type Query {
+  person(email: String, phoneNumber: String, name: String, address: String, birthDate: String): Person
+  persons(phoneNumber: String, name: String, address: String, birthDate: String, email: String): [Person]
+}
+
+type SSN {
+  _pnMetadata: PNMetadata
+  endDate: String
+  startDate: String
+  type: String!
+  use: PhoneNumberUse
+  value: String!
+}
+

@@ -1,61 +1,120 @@
 
 import React from 'react';
-import { Context } from 'vm';
 import { PhoneNumber, Email } from '../api/_person/_person.types';
+import { PrimaryButton } from 'office-ui-fabric-react';
+import { MaskedTextField, TextField } from 'office-ui-fabric-react';
+import { Stack } from 'office-ui-fabric-react/lib/Stack';
+import _ from 'lodash'
 
-interface Props {
-	firstName: String
-	lastName: String
-	email: Email
-	mobilePhone: PhoneNumber
-}
+const log = require('ololog');
+
+interface Props {};
 
 interface State {
-	firstName: String
-	lastName: String
-	email: Email
-	mobilePhone: PhoneNumber,
+	firstName: String | any
+	lastName: String | any
+	email: Email | any
+	mobilePhone: PhoneNumber | any
 	value: any
-}
+};
+
+interface ParamsPerson {
+	email: String
+	phoneNumber: String
+	name: String
+	address: String
+	birthDate: String
+};
+
+const alertClicked = (): void => {
+	alert('Identity Attributes Submitted to the');
+};
 
 class SignupForm extends React.Component<Props, State>{
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-			firstName: props.firstName,
-			lastName: props.lastName,
-			email: props.email,
-			mobilePhone: props.mobilePhone,
-			value: null
+	constructor(props: Props) {
+		super(props);
+		this.state = {
+			firstName: undefined,
+			lastName: undefined,
+			email: undefined,
+			mobilePhone: undefined,
+			value: undefined
 		};
+	}
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+	private _handleChange(event: any, attr: String) {
 
-  handleChange(event:Context) {
-    this.setState({value: event.target.value});
-  }
+	}
 
-  handleSubmit(event:Context) {
-    alert('Your favorite flavor is: ' + this.state.value);
-    event.preventDefault();
-  }
+	private _handleSubmit(event: any) {
+		let alert = event.target
+		log.lightRed(alert)
+		alert(alert)
+		log.yellow('handleSubmit')
+	}
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
+	render() {
+		const style = {
+			input: {
+				margin: 4,
+				padding: 4,
+
+			},
+			btn: {
+				margin: 12,
+				marginTop: 12
+			},
+			title: {
+				margin: 0
+			}
+		}
+
+		return (
+			<section>
+				<form onSubmit={this._handleSubmit}>
+					<label>
+						<h5 style={style.title}>Enter your informtion to join the AuthNet</h5>
+						<div className={'id_attr--submit'}>
+							<Stack>
+
+								<TextField
+									placeholder="first name"
+									onChange={(e) => {
+										this._handleChange(e, 'firstName')
+									}}
+								/>
+
+								<TextField
+									placeholder="last name"
+									onChange={(e) => {
+										this._handleChange(e, 'lastName')
+									}} 
+								/>
+
+								<TextField
+									placeholder="email"
+									onChange={(e) => {
+										this._handleChange(e, 'email')
+									}}
+								/>
+
+								<MaskedTextField
+									mask="(999) 999 9999"
+									onChange={(e) => {
+										this._handleChange(e, 'mobile')
+									}}
+								/>
+
+							</Stack>
+						</div>
+					</label>
+					<PrimaryButton style={style.btn} onClick={(e) => {
+						alertClicked()
+					}} >SUBMIT</PrimaryButton>
+				</form>
+			</section>
+		);
+	}
 }
+
+export default SignupForm

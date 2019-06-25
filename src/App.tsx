@@ -4,6 +4,8 @@ import './App.css';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import axios from 'axios'
 
+import SignupForm from './components/SignupForm'
+
 const log = require('ololog')
 
 const App: React.FC = () => {
@@ -11,7 +13,7 @@ const App: React.FC = () => {
 		<div className="App">
 			<header className="App-header">
 
-				<img src={logo} className="App-logo" alt="logo" />
+				<SignupForm />
 
 				<div>
 
