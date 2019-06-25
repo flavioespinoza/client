@@ -40,6 +40,5 @@ const endpoints = {
 		graphql_method: 'query',
 		pretty_name: 'Find person',
 		description: 'Query a person belonging to the AuthNet with person supplied identity_attribuites such as email, mobile_phone, first_name, last_name, ect...',
-		query: person_query
 	}
 }

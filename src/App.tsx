@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { PrimaryButton } from 'office-ui-fabric-react';
+import axios from 'axios'
 
 const log = require('ololog')
 
@@ -22,7 +23,7 @@ const App: React.FC = () => {
 						checked={false}
 						text="OpenID Connect"
 						onClick={() => {
-							log.lightYellow('OpenID Connect Authorization Code Flow')
+							log.yellow('OpenID Connect Authorization Code Flow')
 						}}
 						allowDisabledFocus={true}
 					/>

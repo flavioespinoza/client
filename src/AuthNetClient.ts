@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
 
 import isomorphicFetch from 'isomorphic-fetch'
-import _disco from './_api/_disco'
+import _disco from './api/_disco'
 
 const httpLink = ApolloLink.from([
 	onError(({ graphQLErrors, networkError }) => {
