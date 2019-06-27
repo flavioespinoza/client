@@ -1,14 +1,4 @@
-require('dotenv').config()
-
-const axios = require('axios')
-const log = require('ololog')
-const _error = require('../../_helpers/_utils')._error
-const disco_url = process.env.URI_DISCO
-
-/**
- * @param {{graphql:http}} endpoints graphql
- * */
-const endpoints = {
+export default {
 	create: {
 		name: 'person_create',
 		method: 'POST',

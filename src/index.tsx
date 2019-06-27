@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { socket } from './api/socket.action'
+
+socket.on('balls', (balls: any) => {
+		console.log('BALLS', balls)
+		socket.emit('boobs', 'DDs!!!!')
+})
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

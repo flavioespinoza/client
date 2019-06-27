@@ -6,13 +6,15 @@ import { MaskedTextField, TextField } from 'office-ui-fabric-react'
 import { Stack } from 'office-ui-fabric-react/lib/Stack'
 import _ from 'lodash'
 
+import _queryPerson from '../api/_person/_person'
+
 const log = require('ololog')
 
 interface Props {}
 
 interface State {
 	email: string | undefined
-	mobilePhone: string | undefined
+	phoneNumber: string | undefined
 	firstName: string | undefined
 	lastName: string | undefined
 	[key: string]: string | undefined
@@ -20,7 +22,7 @@ interface State {
 
 interface Params {
 	email: string | undefined
-	mobilePhone: string | undefined
+	phoneNumber: string | undefined
 	firstName: string | undefined
 	lastName: string | undefined
 	[key: string]: string | undefined
@@ -33,7 +35,7 @@ class SignupForm extends React.Component<Props, State>{
 			firstName: undefined,
 			lastName: undefined,
 			email: undefined,
-			mobilePhone: undefined
+			phoneNumber: undefined
 		}
 	}
 
@@ -42,14 +44,14 @@ class SignupForm extends React.Component<Props, State>{
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email:  this.state.email,
-			mobilePhone: this.state.mobilePhone
+			phoneNumber: this.state.phoneNumber
 		}
 		params[attr] = e.target.value
 		this.setState(params)
 	}
 
 	private _onSubmit(e: any) {
-		let str = this.state.mobilePhone
+		let str = this.state.phoneNumber
 		let mobile = ''
 		if (typeof str === 'string') {
 			mobile = str.slice(0, -1)
@@ -58,10 +60,37 @@ class SignupForm extends React.Component<Props, State>{
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email:  this.state.email,
-			mobilePhone: mobile
+			phoneNumber: mobile
 		}
 		console.log(params)
+
+		this._queryPerson(params)
 		
+	}
+
+	private async _queryPerson (attrs: Params) {
+		let name = ''
+		if (typeof attrs.firstName === 'string' && typeof attrs.lastName === 'string' && typeof attrs.email === 'string'  && typeof attrs.phoneNumber === 'string') {
+			name = `${attrs.firstName} ${attrs.lastName}`
+			
+			let _params  = {
+				name: name,
+				email: attrs.email,
+				phoneNumber: attrs.phoneNumber
+			}
+
+			let _params_test  = {
+				name: 'robert m jones',
+				email: 'bob@jonesfamily.com',
+				phoneNumber: '702-222-2222'
+			}
+
+			const person = await _queryPerson(_params)
+			
+			console.log(person)
+
+		}
+
 	}
 
 	render() {
@@ -118,7 +147,7 @@ class SignupForm extends React.Component<Props, State>{
 									maskFormat={{['9']: /[0-9]/}}
 									mask="999-999-9999"
 									onChange={(e) => {
-										this._handleChange(e, 'mobilePhone')
+										this._handleChange(e, 'phoneNumber')
 									}}
 								/>
 
