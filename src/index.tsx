@@ -5,11 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { socket } from './api/socket.action'
 
-socket.on('balls', (balls: any) => {
-		console.log('BALLS', balls)
+socket.on('query_response', (res: any) => {
+		console.log('res', res)
 		socket.emit('boobs', 'DDs!!!!')
 })
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
