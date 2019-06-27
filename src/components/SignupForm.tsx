@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { PhoneNumber, Email } from '../api/_person/_person.types'
 import { PrimaryButton } from 'office-ui-fabric-react'
 import { MaskedTextField, TextField } from 'office-ui-fabric-react'
 import { Stack } from 'office-ui-fabric-react/lib/Stack'

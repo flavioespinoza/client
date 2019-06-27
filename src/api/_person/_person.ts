@@ -1,10 +1,5 @@
 import axios from 'axios'
-import { PhoneNumberUse } from './_person.types';
-import { socket } from '../socket.action'
 
-socket.on('balls', (balls: any) => {
-		console.log('BALLS', balls)
-})
 
 interface QueryParams {
 	email: string | undefined
@@ -21,7 +16,7 @@ let body = {
 
 const _queryPerson = async (id_attrs: QueryParams) => {
 
-	socket.emit('query_person', {param: id_attrs})
+
 
 	// return new Promise(async (resolve) => {
 	// 	try {

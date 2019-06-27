@@ -7043,10 +7043,10 @@ office-ui-fabric-react@^7.5.0:
     prop-types "^15.5.10"
     tslib "^1.7.1"
 
-ololog@^1.1.129:
-  version "1.1.129"
-  resolved "https://registry.yarnpkg.com/ololog/-/ololog-1.1.129.tgz#d872513ab05d4e5f382f0015d8856eae20356e06"
-  integrity sha512-n8WJx/sSNudAO5Gokwp431vkX3PSDJfLyJMv7mVyFC5MQ8zvQ3IhqmCNv9Q+GGVob5bCfflRQ+yxxkdS34yp8w==
+ololog@^1.1.137:
+  version "1.1.137"
+  resolved "https://registry.yarnpkg.com/ololog/-/ololog-1.1.137.tgz#0b40225ffe1676b24b57d4f5be82d28cc7a9655e"
+  integrity sha512-FlilmOV2CtsHnjkGvnHKagLcn2Al79qVC0vMoRqAANb+OsIhoNuT2SGEdPSAu6h8cQtGlHpUdHRNoxtPU+4cdA==
   dependencies:
     ansicolor "^1.1.84"
     pipez "^1.1.12"
