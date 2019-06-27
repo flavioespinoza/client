@@ -4,12 +4,11 @@ import { PrimaryButton } from 'office-ui-fabric-react'
 import { MaskedTextField, TextField } from 'office-ui-fabric-react'
 import { Stack } from 'office-ui-fabric-react/lib/Stack'
 import _ from 'lodash'
-
-import _queryPerson from '../api/_person/_person'
+import { Link } from 'react-router-dom';
 
 const log = require('ololog')
 
-interface Props {}
+interface Props { }
 
 interface State {
 	email: string | undefined
@@ -42,7 +41,7 @@ class SignupForm extends React.Component<Props, State>{
 		let params: Params = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
-			email:  this.state.email,
+			email: this.state.email,
 			phoneNumber: this.state.phoneNumber
 		}
 		params[attr] = e.target.value
@@ -58,38 +57,10 @@ class SignupForm extends React.Component<Props, State>{
 		let params: Params = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
-			email:  this.state.email,
+			email: this.state.email,
 			phoneNumber: mobile
 		}
 		console.log(params)
-
-		this._queryPerson(params)
-		
-	}
-
-	private async _queryPerson (attrs: Params) {
-		let name = ''
-		if (typeof attrs.firstName === 'string' && typeof attrs.lastName === 'string' && typeof attrs.email === 'string'  && typeof attrs.phoneNumber === 'string') {
-			name = `${attrs.firstName} ${attrs.lastName}`
-			
-			let _params  = {
-				name: name,
-				email: attrs.email,
-				phoneNumber: attrs.phoneNumber
-			}
-
-			let _params_test  = {
-				name: 'robert m jones',
-				email: 'bob@jonesfamily.com',
-				phoneNumber: '702-222-2222'
-			}
-
-			const person = await _queryPerson(_params)
-			
-			console.log(person)
-
-		}
-
 	}
 
 	render() {
@@ -130,7 +101,7 @@ class SignupForm extends React.Component<Props, State>{
 									value={this.state.lastName}
 									onChange={(e) => {
 										this._handleChange(e, 'lastName')
-									}} 
+									}}
 								/>
 
 								<TextField
@@ -143,7 +114,7 @@ class SignupForm extends React.Component<Props, State>{
 
 								<MaskedTextField
 									label={'Mobile phone'}
-									maskFormat={{['9']: /[0-9]/}}
+									maskFormat={{ ['9']: /[0-9]/ }}
 									mask="999-999-9999"
 									onChange={(e) => {
 										this._handleChange(e, 'phoneNumber')
@@ -153,7 +124,24 @@ class SignupForm extends React.Component<Props, State>{
 							</Stack>
 						</div>
 					</label>
-					<PrimaryButton style={style.btn} onClick={this._onSubmit.bind(this)} >JOIN</PrimaryButton>
+
+					<Stack>
+						<Link to={'./openid'}>
+							<PrimaryButton className="btn-openid">
+								Join AuthNet
+						</PrimaryButton>
+						</Link>
+						<Link to={'./openid'}>
+							<PrimaryButton className="btn-openid">
+								OpenID Connect
+						</PrimaryButton>
+						</Link>
+						<Link to={'./person_graph'}>
+							<PrimaryButton className="btn-openid">
+								My Identity Graph
+						</PrimaryButton>
+						</Link>
+					</Stack>
 				</div>
 			</section>
 		)

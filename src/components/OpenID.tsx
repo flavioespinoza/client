@@ -1,0 +1,61 @@
+import React, { Component } from 'react';
+
+interface Props {
+	list: any
+}
+
+interface State {
+	list: any
+}
+
+class OpenID extends Component<Props, State> {
+  // Initialize the state
+  constructor(props: Props){
+    super(props);
+    this.state = {
+      list: []
+    }
+  }
+
+  // Fetch the list on first mount
+  componentDidMount() {
+    this.getList();
+  }
+
+  // Retrieves the list of items from the Express app
+  getList = () => {
+    fetch('/api/openid')
+    .then(res => res.json())
+    .then(list => this.setState({ list }))
+  }
+
+  render() {
+    const { list } = this.state;
+
+    return (
+      <div className="App">
+        <h1>List of Items</h1>
+        {/* Check to see if any items are found*/}
+        {list.length ? (
+          <div>
+            {/* Render the list of items */}
+            {list.map((item: any) => {
+              return(
+                <div>
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div>
+            <h2>No List Items Found</h2>
+          </div>
+        )
+      }
+      </div>
+    );
+  }
+}
+
+export default OpenID;
