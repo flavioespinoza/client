@@ -1,14 +1,14 @@
 
-import React from 'react';
-import { PhoneNumber, Email } from '../api/_person/_person.types';
-import { PrimaryButton } from 'office-ui-fabric-react';
-import { MaskedTextField, TextField } from 'office-ui-fabric-react';
-import { Stack } from 'office-ui-fabric-react/lib/Stack';
+import React from 'react'
+import { PhoneNumber, Email } from '../api/_person/_person.types'
+import { PrimaryButton } from 'office-ui-fabric-react'
+import { MaskedTextField, TextField } from 'office-ui-fabric-react'
+import { Stack } from 'office-ui-fabric-react/lib/Stack'
 import _ from 'lodash'
 
-const log = require('ololog');
+const log = require('ololog')
 
-interface Props {};
+interface Props {}
 
 interface State {
 	email: string | undefined
@@ -16,7 +16,7 @@ interface State {
 	firstName: string | undefined
 	lastName: string | undefined
 	[key: string]: string | undefined
-};
+}
 
 interface Params {
 	email: string | undefined
@@ -28,7 +28,7 @@ interface Params {
 
 class SignupForm extends React.Component<Props, State>{
 	constructor(props: Props) {
-		super(props);
+		super(props)
 		this.state = {
 			firstName: undefined,
 			lastName: undefined,
@@ -128,7 +128,7 @@ class SignupForm extends React.Component<Props, State>{
 					<PrimaryButton style={style.btn} onClick={this._onSubmit.bind(this)} >JOIN</PrimaryButton>
 				</div>
 			</section>
-		);
+		)
 	}
 }
 
