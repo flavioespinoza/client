@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { PrimaryButton } from 'office-ui-fabric-react';
-import axios from 'axios'
 
 import SignupForm from './components/SignupForm'
 

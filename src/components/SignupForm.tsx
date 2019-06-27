@@ -11,24 +11,20 @@ const log = require('ololog');
 interface Props {};
 
 interface State {
-	firstName: String | any
-	lastName: String | any
-	email: Email | any
-	mobilePhone: PhoneNumber | any
-	value: any
+	email: string | undefined
+	mobilePhone: string | undefined
+	firstName: string | undefined
+	lastName: string | undefined
+	[key: string]: string | undefined
 };
 
-interface ParamsPerson {
-	email: String
-	phoneNumber: String
-	name: String
-	address: String
-	birthDate: String
-};
-
-const alertClicked = (): void => {
-	alert('Identity Attributes Submitted to the');
-};
+interface Params {
+	email: string | undefined
+	mobilePhone: string | undefined
+	firstName: string | undefined
+	lastName: string | undefined
+	[key: string]: string | undefined
+}
 
 class SignupForm extends React.Component<Props, State>{
 	constructor(props: Props) {
@@ -37,20 +33,35 @@ class SignupForm extends React.Component<Props, State>{
 			firstName: undefined,
 			lastName: undefined,
 			email: undefined,
-			mobilePhone: undefined,
-			value: undefined
-		};
+			mobilePhone: undefined
+		}
 	}
 
-	private _handleChange(event: any, attr: String) {
-
+	private _handleChange(e: any, attr: string) {
+		let params: Params = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			email:  this.state.email,
+			mobilePhone: this.state.mobilePhone
+		}
+		params[attr] = e.target.value
+		this.setState(params)
 	}
 
-	private _handleSubmit(event: any) {
-		let alert = event.target
-		log.lightRed(alert)
-		alert(alert)
-		log.yellow('handleSubmit')
+	private _onSubmit(e: any) {
+		let str = this.state.mobilePhone
+		let mobile = ''
+		if (typeof str === 'string') {
+			mobile = str.slice(0, -1)
+		}
+		let params: Params = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			email:  this.state.email,
+			mobilePhone: mobile
+		}
+		console.log(params)
+		
 	}
 
 	render() {
@@ -62,7 +73,7 @@ class SignupForm extends React.Component<Props, State>{
 			},
 			btn: {
 				margin: 12,
-				marginTop: 12
+				marginTop: 24
 			},
 			title: {
 				margin: 0
@@ -71,47 +82,51 @@ class SignupForm extends React.Component<Props, State>{
 
 		return (
 			<section>
-				<form onSubmit={this._handleSubmit}>
+				<div>
 					<label>
 						<h5 style={style.title}>Enter your informtion to join the AuthNet</h5>
 						<div className={'id_attr--submit'}>
 							<Stack>
 
 								<TextField
-									placeholder="first name"
+									label={'First name'}
+									placeholder="First name"
 									onChange={(e) => {
 										this._handleChange(e, 'firstName')
 									}}
 								/>
 
 								<TextField
-									placeholder="last name"
+									label={'Last name'}
+									placeholder="Last name"
+									value={this.state.lastName}
 									onChange={(e) => {
 										this._handleChange(e, 'lastName')
 									}} 
 								/>
 
 								<TextField
-									placeholder="email"
+									label={'Email'}
+									placeholder="Email"
 									onChange={(e) => {
 										this._handleChange(e, 'email')
 									}}
 								/>
 
 								<MaskedTextField
-									mask="(999) 999 9999"
+									label={'Mobile phone'}
+									maskFormat={{['9']: /[0-9]/}}
+									mask="999-999-9999"
 									onChange={(e) => {
-										this._handleChange(e, 'mobile')
+										this._handleChange(e, 'mobilePhone')
 									}}
 								/>
 
 							</Stack>
 						</div>
 					</label>
-					<PrimaryButton style={style.btn} onClick={(e) => {
-						alertClicked()
-					}} >SUBMIT</PrimaryButton>
-				</form>
+					<PrimaryButton style={style.btn} onClick={this._onSubmit.bind(this)} >JOIN</PrimaryButton>
+				</div>
 			</section>
 		);
 	}
