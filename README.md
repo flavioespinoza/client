@@ -1,2 +1,2 @@
-# authnet-app client
-React client in TypeScript
+# open-id client
+React OpenID Connect client written in TypeScript
