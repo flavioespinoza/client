@@ -91,6 +91,14 @@ enum PostalAddressUse {
   BILLING
 }
 
+
+enum PostalAddressUsBake {
+  HOME
+  WORK
+  MAIL
+  BILLING
+}
+
 type Query {
   person(email: String, phoneNumber: String, name: String, address: String, birthDate: String): Person
   persons(phoneNumber: String, name: String, address: String, birthDate: String, email: String): [Person]
